@@ -1,0 +1,6 @@
+sphinx>=3.0
+sphinx-autobuild
+sphinx-rtd-theme
+sphinxcontrib-httpdomain
+sphinx-markdown-tables
+recommonmark
