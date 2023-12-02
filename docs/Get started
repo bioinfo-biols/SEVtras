@@ -1,4 +1,5 @@
 How to use SEVtras?
+
 SEVtras.sEV_recognizer(input_path='directory_path', sample_file='sample_name', out_path='output_path', species='Homo')
 
 celltype_sEV_number, adata_sEV, adata_combined = SEVtras.deconvolver(adata_sEV='sEV_SEVtras.h5ad', adata_cell='cells.h5ad', OBSsample='batch', OBScelltype='celltype')

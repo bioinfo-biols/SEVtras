@@ -2,7 +2,7 @@
 SEVtras delineates small extracellular vesicles at droplet resolution from single-cell transcriptomes
 ----------------------------------------------------------------------------------------------------------
 
-**SEVtras** stands for **sEV**\ -con**t**\ aining d**r**\ oplet identific**a**\ tion in **s**\ cRNA-seq data.
+**SEVtras** stands for **sEV**\ -con\ **t**\ aining d\ **r**\ oplet identific\ **a**\ tion in **s**\ cRNA-seq data.
 
 You can freely use SEVtras to explore sEV heterogeneity at single droplet, characterize cell type dynamics in light of sEV activity and unlock diagnostic potential of sEVs in concert with cells.
 
@@ -33,6 +33,5 @@ Key applications of SEVtras
    :maxdepth: 1
    :hidden:
 
-   sEVs recognizing
-   ESAI
-   ESAI_c
+   Part I sEVs recognizing
+   Part II ESAI calculating
