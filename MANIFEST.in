@@ -1,0 +1,8 @@
+include README.md
+include docs/SEVtras_overview.png
+include docs/Part1.png
+include docs/Part2.png
+include tests/*
+include SEVtras/id_homo_rna_ev
+include SEVtras/id_mus_rna_ev
+include SEVtras/evs.gmt
