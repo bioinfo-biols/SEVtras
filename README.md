@@ -21,7 +21,7 @@ pip install SEVtras
 We also suggest to use a separate conda environment for installing SEVtras.
 ```bash
 conda create -y -n SEVtras_env python=3.7
-conda activate SEVtras_env
+source activate SEVtras_env
 pip install SEVtras
 ```
 

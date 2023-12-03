@@ -24,7 +24,6 @@ Key applications of SEVtras
    :maxdepth: 1
    :hidden:
 
-   Overview
    Installation
    Functions
 

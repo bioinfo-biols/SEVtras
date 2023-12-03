@@ -12,7 +12,7 @@ SEVtras provides function ``ESAI_calculator`` to evaluate dynamic of cellular sE
 .. code-block:: python
 
     import SEVtras
-    SEVtras.ESAI_calculator(adata_ev_path='./outputs/sEVs_SEVtras.h5ad', adata_cell_path='./outputs/adata_cell.h5ad', out_path='./outputs', Xraw=False, OBSsample='batch', OBScelltype='celltype')
+    SEVtras.ESAI_calculator(adata_ev_path='./tests/sEV_SEVtras.h5ad', adata_cell_path='./tests/test_cell.h5ad', out_path='./outputs', Xraw=False, OBSsample='batch', OBScelltype='celltype')
 
 The first two parameters represent the path to sEV- and cell- anndata objects. 
 
@@ -27,16 +27,7 @@ The fourth parameter means whether to use the raw object in the ``adata_cell`` o
 
 The last two parameters define which index represents the sample and cell type information in the ``obs`` of adata. By default, SEVtras uses the index of ``batch`` and ``celltype`` in the ``obs`` of ``adata_cell``\. We can change the index with the parameters and *OBSsample* and *OBScelltype*\. 
 
-The original cell type for each droplet listed in the ``obsm`` of ``SEVtras_sEVs.h5ad`` indexed as ``source``.
-And *ESAI_celltype.csv* includes values of ESAI for each cell type as follows:
-
-+------------+------------+-------------+------------+-----------+
-|      0     |  celltype0 |  celltype1  |  celltype2 | celltype3 |
-+============+============+=============+============+===========+
-| test1_h5ad |    4.25    | 0.090909091 |      0     |     0     |
-+------------+------------+-------------+------------+-----------+
-| test2_h5ad |      0     |    0.0625   |     1.5    |   1.9375  |
-+------------+------------+-------------+------------+-----------+
+The original cell type for each droplet listed in the ``obsm`` of ``SEVtras_sEVs.h5ad`` indexed as ``source``. 
 
 The result of *SEVumap.pdf* and *ESAIumap.pdf* is similar to the following: 
 

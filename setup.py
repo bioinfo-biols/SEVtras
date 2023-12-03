@@ -17,14 +17,14 @@ setup(
         "scipy>=1.5.4",
         "statsmodels>=0.12.1",
         "anndata>=0.7.4",
-        "gseapy",
-        'umap-learn>=0.5.0',#3.10
+        "gseapy==0.14.0",
+        'umap-learn==0.5.3',#3.10
+        # "scanpy==1.8.1",
         # "copy",
         # "sys",
         # "os",
         # "multiprocessing",
         # "pickle>=4.0",
-        # "scanpy>=1.6.0",
     ],
     python_requires='>=3.7.1',
     classifiers=[
@@ -34,8 +34,6 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
         'Topic :: Scientific/Engineering :: Bio-Informatics',
       ],
     include_package_data=True,
