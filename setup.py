@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='SEVtras',
-    version='0.2',
+    version='0.2.6',
     author='Ruiqiao He',
     author_email='ruiqiaohe@gmail.com',
     packages=['SEVtras'],

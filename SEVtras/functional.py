@@ -52,7 +52,6 @@ def near_neighbor(adata_combined, OBSsample='batch', OBSev='sEV', OBScelltype='c
     for sample in adata_combined.obs[OBSsample].unique().astype(str):
         tse_ref = copy.copy(adata_combined[(adata_combined.obs[OBSev] == '0') & (adata_combined.obs[OBSsample] == sample),])
         if tse_ref.shape[0] > 0:
-            print('No matched cell sample for sEV deconvolution')
             cell_tree = cKDTree(tse_ref.obsm[OBSMpca], leafsize=100)
             
             tmp_umap = adata_combined[(adata_combined.obs[OBSev] == '1') & (adata_combined.obs[OBSsample] == sample),].obsm[OBSMpca]
@@ -60,6 +59,8 @@ def near_neighbor(adata_combined, OBSsample='batch', OBSev='sEV', OBScelltype='c
                 TheResult = cell_tree.query(tmp_umap[i,], k=10)
 
                 near_neighbor.append([sample, i] + list(tse_ref.obs[OBScelltype].iloc[TheResult[1]]))#tmp_umap.obs['clusters'][i]] +
+        else:
+            print('No matched cell sample for sEV deconvolution')
 
     near_neighbor_dat = pd.DataFrame(near_neighbor)
     return(near_neighbor_dat)
