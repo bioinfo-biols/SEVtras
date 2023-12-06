@@ -12,7 +12,7 @@ This function used for sEV recognizing.
 * *sample_file*\: the path of each sample row by row,  
 * *out_path*\: the path for output files, 
 * *input_path*\: if all input files in the same directory, we can use this to represent the path, default is ``None``\, 
-* *species*\: the species from which the scRNA-seq sample was sequenced, default is ``Homo``\, 
+* *species*\: the species from which the scRNA-seq sample was sequenced, default is ``Homo``\. For mouse samples, you can use ``Mus``\, 
 * *predefine_threads*\: SEVtras uses parallel processing for acceleration, we can define how many cpu cores to use, default is all cpu cores minus two ``-2``\,  
 * *get_only*\: whether to read protein information in the adata, default is ``False``\,  
 * *score_t*\: the threshold for SEVtras score to recognize sEVs, default is ``None``\, if no sEVs found, we can change *score_t* to a smaller threshold, e.g. '10',

@@ -7,7 +7,7 @@ Here, we used data in github ``tests`` directory as an example, and shown how SE
 
 **Note2:** This part requires parallel processing using the ``multiprocessing`` package. This package is currently not compatible with Jupyter on Windows 10. Running this part in Linux is preferred.
 
-**Note2:** We don't recommend recognizing sEVs with a single sample. Inputting more similar samples  would lead to more reliable results.
+**Note3:** We don't recommend recognizing sEVs with a single sample. Inputting more similar samples  would lead to more reliable results.
 
 We support two file input ways to run sEVs recognizing: 
 
