@@ -783,7 +783,8 @@ def _read(
             # logg.debug(f"reading sheet {sheet} from file {filename}")
             return read_hdf(filename, sheet)
     # read other file types
-    cachedir = "./cache/"
+    # cachedir = "./cache/"
+    cachedir = Path("./cache/")
     path_cache: Path = cachedir / _slugify(filename).replace(
         f".{ext}", ".h5ad"
     )
