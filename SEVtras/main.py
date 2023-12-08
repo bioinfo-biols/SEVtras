@@ -43,18 +43,20 @@ def sEV_aggregator(out_path, name_list, max_M, score_t, threads, search_UMI, fla
 
         adata_com.obs['sEV'] = ['sEV' if i else 'False' for i in (adata_com.obs['total_counts'] < search_UMI) & (adata_com.obs['score'] < score_t)]
 
+        adata_com.obs['score1'] = -np.log10(adata_com.obs['score'] + adata_com.obs.loc[(adata_com.obs['score']>0).values, 'score'].min()/10)
         ## write files in this project
-        adata_ev = copy.copy(adata_com[(adata_com.obs['total_counts'] < search_UMI) & (adata_com.obs['score'] < score_t), :]) 
+        adata_ev = copy.copy(adata_com[(adata_com.obs['total_counts'] < search_UMI) & (adata_com.obs['score'] < score_t), :])
         adata_ev = adata_ev.copy()
-        adata_com.obs['score'] = -np.log10(adata_com.obs['score'] + adata_com.obs.loc[(adata_com.obs['score']>0).values, 'score'].min()/10)
-        adata_ev.obs['score'] = -np.log10(adata_ev.obs['score'] + adata_ev.obs.loc[(adata_ev.obs['score']>0).values, 'score'].min()/10)
+        adata_com.obs['score'] = adata_com.obs['score1']
+        adata_ev.obs['score'] = adata_ev.obs['score1']
+
         adata_com.write(str(out_path) + '/raw_' + 'SEVtras' + '.h5ad')
         adata_ev.write(str(out_path) + '/sEV_SEVtras.h5ad')
     
     return('Aggregation done!')
 
 
-def sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', predefine_threads=-2, get_only=False, score_t = None, search_UMI=500):
+def sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', predefine_threads=-2, get_only=False, score_t = None, search_UMI=500, alpha=0.10, dir_origin=True):
     if not os.path.exists(out_path):
         os.makedirs(out_path)
 
@@ -84,7 +86,7 @@ def sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', prede
         else:
             each_adata = sample
 
-        adata = read_adata(each_adata, get_only=False)
+        adata = read_adata(each_adata, get_only=get_only, dir_origin=dir_origin)
         adata = filter_adata(adata)
         sample = sample.replace(".", "_")
         name_list.append(sample)
@@ -108,13 +110,13 @@ def sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', prede
         ##iterations 
         for itera in range(10):
             if(len(iteration_list) == 0):
-                print('no genes')
+                print('No genes enriched, please check input sample:' + str(sample))
                 flag = 0
                 break
 
             thershold = 0
             iteration_list_old = iteration_list
-            inter_adata, iteration_list = iteration(inter_adata, iteration_list, thershold, max_M, threads=threads, number_g = 30, alpha = 0.10)
+            inter_adata, iteration_list = iteration(inter_adata, iteration_list, thershold, max_M, threads=threads, number_g = 30, alpha = alpha)
             print(itera, len(iteration_list))
                 
             if(len(set(iteration_list_old) & set(iteration_list)) == max(len(iteration_list_old), len(iteration_list))):
@@ -138,7 +140,7 @@ def sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', prede
             adata = final_menrich(adata, same, thershold, max_M, threads)
 
         else:
-            print('sEV undetectable  in ' + str(sample))
+            print('sEV is hard to detect in ' + str(sample))
             continue
         
         ## write files
@@ -154,8 +156,12 @@ def sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', prede
                 os.mkdir(str(out_path) + '/tmp_out/' + sample)
 
             adata.write(str(out_path) + '/tmp_out/' + sample + '/raw_' + sample + '.h5ad')
-            with open(str(out_path) +'/tmp_out/' + sample + '/itera_gene.txt', 'wb') as fp:
-                pickle.dump(inter_gene, fp)
+            
+            print(str(sample) + ' finished')
+            if len(inter_gene) > 0:
+                with open(str(out_path) +'/tmp_out/' + sample + '/itera_gene.txt', 'wb') as fp:
+                    pickle.dump(inter_gene, fp)
+
         else:
             adata.obs['sEV'] = ['sEV' if i else 'False' for i in (adata.obs['total_counts'] < search_UMI) & (adata.obs['score'] < score_t)]
             adata.obs['score'] = -np.log10(adata.obs['score'] + adata.obs.loc[(adata.obs['score']>0).values, 'score'].min()/10)
@@ -218,6 +224,11 @@ def ESAI_calculator(adata_ev_path, adata_cell_path, out_path, OBSsample='batch',
 
     return('ESAI done!')
 
+def sEV_imputation(adata_sEV):
+    from .sc_pp import magic
+    adata_out = magic(adata_sEV)
+    print('Imputation done')
+    return(adata_out)
 
 def sEV_enrichment(adata_sEV, nBP=15):
     matrix = adata_sEV.X.A

@@ -24,13 +24,16 @@ def get_sample(sample_log):
     return(names_list)
 
 
-def read_adata(adata_path, get_only=False):
+def read_adata(adata_path, dir_origin = True, get_only=False):
     if (adata_path).endswith('.h5'):
         adata = read_10x_h5(adata_path)
     elif (adata_path).endswith('.h5ad'):
         adata = read_h5ad(adata_path)
     else:
-        adata = read_10x_mtx(adata_path + '/outs/raw_feature_bc_matrix/')
+        if dir_origin == True:
+            adata = read_10x_mtx(adata_path + '/outs/raw_feature_bc_matrix/')
+        else:
+            adata = read_10x_mtx(adata_path)
 
     return(adata)
 

@@ -17,7 +17,7 @@ We support two file input ways to run sEVs recognizing:
     import SEVtras
     SEVtras.sEV_recognizer(input_path='./tests', sample_file='./tests/sample_file', out_path='./outputs', species='Homo')
 
-The first parameter was the path of directory that contains all samples. Because these test files exists in our ``tests`` directory, so we used ``./tests``. The second parameter was the name of each sample in th directory row by row. If your data format is ``10x_mtx``\, SEVtras can automatically detect the directory of ``sample/outs/raw_feature_bc_matrix/``\. 
+The first parameter was the path of directory that contains all samples. Because these test files exists in our ``tests`` directory, so we used ``./tests``. The second parameter was the name of each sample in th directory row by row. If your data format is ``10x_mtx``\, SEVtras can automatically detect the directory of ``sample/outs/raw_feature_bc_matrix/`` (see parameter ``dir_origin``). 
 
 *out_path* defines the output of SEVtras that is one h5ad file, named ``raw_SEVtras.h5ad``, with SEVtras score ('score') and sEV classification ('sEV') in the ``obs`` for all droplets, and one named ``sEVs_SEVtras.h5ad`` with only sEV-containing droplets. 
 

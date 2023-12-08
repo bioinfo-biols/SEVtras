@@ -5,7 +5,7 @@ The main functions in SEVtras are listed below:
 
 .. code-block:: python
 
-    SEVtras.sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', predefine_threads=-2, get_only=False, score_t = None, search_UMI=500)  
+    SEVtras.sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', predefine_threads=-2, get_only=False, score_t=None, search_UMI=500, alpha=0.1, dir_origin=True)  
 
 This function used for sEV recognizing. 
 
@@ -15,8 +15,10 @@ This function used for sEV recognizing.
 * *species*\: the species from which the scRNA-seq sample was sequenced, default is ``Homo``\. For mouse samples, you can use ``Mus``\, 
 * *predefine_threads*\: SEVtras uses parallel processing for acceleration, we can define how many cpu cores to use, default is all cpu cores minus two ``-2``\,  
 * *get_only*\: whether to read protein information in the adata, default is ``False``\,  
-* *score_t*\: the threshold for SEVtras score to recognize sEVs, default is ``None``\, if no sEVs found, we can change *score_t* to a smaller threshold, e.g. '10',
-* *search_UMI*\: the UMI range to search for sEVs, default is ``500``, you can use ``200`` for stricter recognization.
+* *score_t*\: the threshold for SEVtras score to recognize sEVs, default is ``None``\. If no sEVs found in the *sEVs_SEVtras.h5ad*\, we can change *score_t* to a smaller threshold (``str``), e.g. '10', 
+* *search_UMI*\: the UMI range to search for sEVs, default is ``500``, you can use ``200`` for stricter recognization,
+* *alpha*\: the parameter for identifying sEV representative genes for each sample, default is ``0.01``. If you cannot detect sEVs in all samples, the parameter can be loosened to a smaller value, e.g. ``0.09``\,
+* *dir_origin*\: the path of *matrix.mtx.gz*\, default is ``True`` assuming that the file of *matrix.mtx.gz* locates at ``sample/outs/raw_feature_bc_matrix/``\. If you set it as ``False``, SEVtras search for *matrix.mtx.gz* in the path of each sample in the parameter *sample_file*\. 
 
 .. code-block:: python
 
@@ -41,6 +43,12 @@ This function used for ESAI calculating.
 
 .. code-block:: python
 
+    SEVtras.sEV_imputation(adata_sEV) 
+
+This function used for sEV data imputation.
+
+.. code-block:: python
+
     SEVtras.cellfree_simulator(out_path, gene_exp_ev, gene_exp_cell, expect_UMI = [40, 70, 100, 130], sEV_fraction = [0.005, 0.01, 0.05, 0.10], sEV=500)
 
 This function used for cell free droplets simulation. 
@@ -50,3 +58,4 @@ This function used for cell free droplets simulation.
     SEVtras.sEV_enrichment(adata_sEV, nBP=15) 
 
 This function used for sEV data GO enrichment.
+
