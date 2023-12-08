@@ -141,7 +141,7 @@ def sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', prede
 
         else:
             print('sEV is hard to detect in ' + str(sample))
-            continue
+            # continue
         
         ## write files
         if len_sample > 1:
