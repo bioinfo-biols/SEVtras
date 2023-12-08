@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-#import scanpy as sc
 import anndata
 from .sc_readwrite import read, read_10x_h5, read_10x_mtx, write, read_visium
 from anndata import AnnData, concat

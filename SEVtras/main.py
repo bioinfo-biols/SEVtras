@@ -39,6 +39,7 @@ def sEV_aggregator(out_path, name_list, max_M, score_t, threads, search_UMI, fla
         pth = 0.005
         same = [i for i in (iteration_list) if i in adata_com.var_names]
         thershold = 0
+        max_M = max(adata_com.obs['n_genes'])
         adata_com = final_menrich(adata_com, same, thershold, max_M, threads)
 
         adata_com.obs['sEV'] = ['sEV' if i else 'False' for i in (adata_com.obs['total_counts'] < search_UMI) & (adata_com.obs['score'] < score_t)]
