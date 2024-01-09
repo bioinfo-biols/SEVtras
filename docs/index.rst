@@ -34,3 +34,5 @@ Key applications of SEVtras
 
    Part I sEVs recognizing
    Part II ESAI calculating
+   Troubleshooting
+   

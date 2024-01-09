@@ -5,7 +5,7 @@ Here, we used data in github ``tests`` directory as an example, and shown how SE
 
 **Note1:** The input droplet-gene matrix for SEVtras should be the raw data; herein, the matrix should come from the *raw_feature_bc_matrix* directory in Cell Ranger *outs*\. 
 
-**Note2:** This part requires parallel processing using the ``multiprocessing`` package. This package is currently not compatible with Jupyter on Windows 10. Running this part in Linux is preferred.
+**Note2:** This part requires parallel processing using the ``multiprocessing`` package. This package is currently not compatible with Jupyter on Windows 10 and certain version of WSL. Running this part in Linux is preferred.
 
 **Note3:** We don't recommend recognizing sEVs with a single sample. Inputting more similar samples  would lead to more reliable results.
 
