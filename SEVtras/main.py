@@ -65,6 +65,9 @@ def sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', prede
         threads = cpu_count()-2
     else:
         threads = predefine_threads
+
+    if threads <= 0:
+        threads = 1
     
     if out_path.endswith('/'):
         out_path = out_path[:-1]
