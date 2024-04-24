@@ -42,9 +42,11 @@ Troubleshooting
 
 9. The cell data was preprocessed by **Scanpy** / **Seurat**, how to input for SEVtras? When to use ``Xraw``?
     
- It is OK to pre-process your cell data, including normalization, filtering and batch correction, before entering them into SEVtras. You can input raw cell data to SEVtras with the cell type information generated from the pre-processed one. After cell type assignment, please run the following command to make is categorical with `adata.obs['celltype'] = pd.Categorical(adata.obs['celltype_clusters'].astype(str))`. 
+ It is OK to pre-process your cell data, including normalization, filtering and batch correction, before entering them into SEVtras. You can input unprocessed cell data to SEVtras with the cell type information generated from the pre-processed one. After cell type assignment, please run the following command to make is categorical with `adata.obs['celltype'] = pd.Categorical(adata.obs['celltype_clusters'].astype(str))`. 
 
- The reason for setting ``Xraw=True`` is to ensure that sEV-characterized genes are not filtered out in the pre-processing and filtering steps of the cell matrix. If you are able to save all gene expressions of the cell matrix during the conversion, I encourage you to save them and set ``Xraw=True``. If the raw data cannot be saved in some cases, you can follow the solution above.
+ The reason for setting ``Xraw=True`` is to ensure that sEV-characterized genes are not filtered out in the pre-processing and filtering steps of the cell matrix. If you are able to save all gene expressions of the cell matrix during the conversion, I encourage you to save them and set ``Xraw=True``. If the raw data cannot be saved in some cases, you can follow the solution above. 
+
+ Noted: ``Xraw`` does not mean the *raw_feature_bc_matrix* in Cell Ranger outs, it means the unprocessed cell data without filtering steps.
 
 10. Does SEVtras only apply to humans and mice, and not to other non-model species? 
     
