@@ -34,7 +34,7 @@ This function used for ESAI calculating.
 * *OBSev*\: the index represents the sEV information in the ``obs`` of adata, default is ``sEV``\, 
 * *OBSMpca*\: the index represents the PCA information in the ``obsm`` of adata, default is ``X_pca``\, 
 * *cellN*\: the number of neighors used for ESAI deconvolution, default is ``10``\, 
-* *Xraw*\:  whether or not to use the raw object in the ``adata_cell``. If ``adata_cell`` has been filtered or normalized, please set ``Xraw=True``, and ``adata_cell.raw`` will be used. Note: save raw ``adata_cell`` as ``adata_cell.raw`` before filtering. Default is ``True``\, 
+* *Xraw*\:  whether or not to use the raw object in the ``adata_cell``. If ``adata_cell`` has been filtered or normalized, please set ``Xraw=True``, and ``adata_cell.raw`` will be used. Note: if set ``Xraw=True``, save raw ``adata_cell`` as ``adata_cell.raw`` before filtering. Default is ``True``\, 
 * *normalW*\: whether or not to scale ``adata_cell`` in ESAI deconvolution, default is ``True``\, 
 * *plot_cmp*\: the pallete used for plot different cell types in umap, default is ``SEV_builtin``\, you can use other pallete in matplotlib e.g. ``Set2``\, 
 * *save_plot_prefix*\: the prefix name for saved files, default is ``''``\, 

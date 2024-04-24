@@ -24,11 +24,41 @@ Troubleshooting
  
  Thus, please check that the sample name in the sEV matrix matches the sample name in the cell matrix (this should be contained in adata.obs, default is key 'batch' in the sEV matrix and cell matrix).
 
-6. Why does the output file only contain "raw_Sample.h5ad" when I input a **single** scRNA-seq sample for SEVtras? 
+6. Memory overflow when running SEVtras? 
+   
+ The default parameter of SEVtras is to use almost all CPU cores in your Linux server. This can cause memory overflows if the Linux server has a lot of CPU cores. You can use fewer CPU cores with `predefine_threads=20` to solve this problem.
+
+7. The ``OBSsample`` (sample index) should be the same in adata_ev and adata_cell, default is 'batch'. This can be 'orig.ident' in **Seurat**, you can unify it with `adata.obs['batch'] = adata.obs['orig.ident']`. 
+
+8. The SEVtras process was interrupted after running a part of the samples. How can I continue the process?
+
+ You only need run SEVtras for the remaining samples. After finished, you can used following code to integrate all samples: 
+
+ .. code-block:: python 
+
+    import SEVtras
+    from SEVtras.main import sEV_aggregator
+    sEV_aggregator(out_path='the path you set to output in the previous step', name_list=['the sample name1 in your list', 'the sample name2 in your list', 'the sample nameN in your list'], max_M=1000, score_t=1e-15, threads=30, search_UMI=500, flag=0)
+
+9. The cell data was preprocessed by **Scanpy** / **Seurat**, how to input for SEVtras? When to use ``Xraw``?
+    
+ It is OK to pre-process your cell data, including normalization, filtering and batch correction, before entering them into SEVtras. You can input raw cell data to SEVtras with the cell type information generated from the pre-processed one. After cell type assignment, please run the following command to make is categorical with `adata.obs['celltype'] = pd.Categorical(adata.obs['celltype_clusters'].astype(str))`. 
+
+ The reason for setting ``Xraw=True`` is to ensure that sEV-characterized genes are not filtered out in the pre-processing and filtering steps of the cell matrix. If you are able to save all gene expressions of the cell matrix during the conversion, I encourage you to save them and set ``Xraw=True``. If the raw data cannot be saved in some cases, you can follow the solution above.
+
+10. Does SEVtras only apply to humans and mice, and not to other non-model species? 
+    
+ The sEV-characteristic gene set is not sufficient for other non-model species. Currently, SEVtras only supports human and mouse. 
+
+10. Why does the output file only contain "raw_Sample.h5ad" when I input a **single** scRNA-seq sample for SEVtras? 
    
  SEVtras is a data-driven algorithm to identify sEV-droplets. The reliability of the identification results increases with the number of inputted samples. It is recommended to input more than one sample for more reliable results. If the necessary data is not available, two copies of the same sample can be created and SEVtras will generate the corresponding results.
 
-7. Does SEVtras support h5ad file converted from **Seurat**? 
+10. Does SEVtras support single nucleus RNA-seq data data? 
+   
+ SEVtras doesn't support single nucleus RNA-seq data (snRNA-seq). This is due to the experimental procedure of snRNA-seq. Small extracellular vesicles (sEVs) would be almost filtered out during the nuclei isolation and extraction process, so our software is not suitable for analyzing this type of data. 
+
+11. Does SEVtras support h5ad file converted from **Seurat**? 
 
  Yes. There is a `tutorial <https://www.youtube.com/watch?v=-MATf22tcak>`_ to convert Seurat to h5ad. I copied as following: 
  
@@ -95,4 +125,5 @@ Troubleshooting
 
     adata.write_h5ad('../Seurat to H5AD/adata.h5ad')
 
+ After conversion, you also need to set the cell cluster in adata.obs to Categorical with `adata.obs['celltype'] = pd.Categorical(adata.obs['seurat_clusters'].astype(str))`.
 
