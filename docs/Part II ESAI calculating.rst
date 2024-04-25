@@ -19,9 +19,9 @@ The first two parameters represent the path to sEV- and cell- anndata objects.
 The third parameter specifies the path of the ``ESAI_calculator`` outputs. The outputs include:  
 
 -  an adata file combining both ``adata_ev`` and ``adata_cell``, named *SEVtras_combined.h5ad*; 
--  two csv files calculating the sEV secretion activity index at the sample level (ESAI) and cell type level (ESAI_c), named  *ESAI_sample.csv* and *ESAI_celltype.csv*\; 
+-  two csv files calculating the sEV secretion activity index at the sample level (**ESAI**) and cell type level (**ESAI_c**), named  *ESAI_sample.csv* and *ESAI_celltype.csv*\; 
 -  one pdf file embedding sEVs and cells in a umap , named *SEVumap.pdf*\; 
--  and two pdf files plotting the ESAI_c in a umap, named *ESAIumap.pdf* and *ESAIumap_sample.pdf*\. 
+-  and two pdf files plotting the **ESAI_c** in a umap, named *ESAIumap.pdf* and *ESAIumap_sample.pdf*\; Here, **ESAI_c** is the sEV secretion activity at the cell type level in all your samples, and **ESAI_cS** means the sEV secretion activity at the cell type level resolved sample by sample. 
 
 The fourth parameter means whether to use the raw object in the ``adata_cell`` or not. If ``adata_cell`` has been filtered or normalized, please set ``Xraw=True``, and ``adata_cell.raw`` will be used (Note: save raw ``adata_cell`` as ``adata_cell.raw`` before filtering). 
 
