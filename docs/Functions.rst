@@ -22,13 +22,14 @@ This function used for sEV recognizing.
 
 .. code-block:: python
 
-    SEVtras.ESAI_calculator(adata_ev, adata_cell, out_path, OBSsample='batch', OBScelltype='celltype', OBSev='sEV', OBSMpca='X_pca', cellN=10, Xraw = True, normalW=True, plot_cmp='SEV_builtin', save_plot_prefix='', OBSMumap='X_umap',size=10) 
+    SEVtras.ESAI_calculator(adata_ev, adata_cell, out_path, species='Homo', OBSsample='batch', OBScelltype='celltype', OBSev='sEV', OBSMpca='X_pca', cellN=10, Xraw = True, normalW=True, plot_cmp='SEV_builtin', save_plot_prefix='', OBSMumap='X_umap',size=10) 
 
 This function used for ESAI calculating. 
 
 * *adata_ev*\: the path to sEV-anndata objects, 
 * *adata_cell*\: the path to cell-anndata objects, 
 * *out_path*\: the path for output files, 
+* *species*\: the species from which the scRNA-seq sample was sequenced, default is ``Homo``\. For mouse samples, you can use ``Mus``\, 
 * *OBSsample*\: the index represents the sample information in the ``obs`` of adata, default is ``batch``\, 
 * *OBScelltype*\: the index represents the cell type information in the ``obs`` of adata, default is ``celltype``\, 
 * *OBSev*\: the index represents the sEV information in the ``obs`` of adata, default is ``sEV``\, 
