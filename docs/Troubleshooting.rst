@@ -52,15 +52,15 @@ Troubleshooting
     
  The sEV-characteristic gene set is not sufficient for other non-model species. Currently, SEVtras only supports human and mouse. 
 
-10. Why does the output file only contain "raw_Sample.h5ad" when I input a **single** scRNA-seq sample for SEVtras? 
+11. Why does the output file only contain "raw_Sample.h5ad" when I input a **single** scRNA-seq sample for SEVtras? 
    
  SEVtras is a data-driven algorithm to identify sEV-droplets. The reliability of the identification results increases with the number of inputted samples. It is recommended to input more than one sample for more reliable results. If the necessary data is not available, two copies of the same sample can be created and SEVtras will generate the corresponding results.
 
-10. Does SEVtras support single nucleus RNA-seq data data? 
+12. Does SEVtras support single nucleus RNA-seq data data? 
    
  SEVtras doesn't support single nucleus RNA-seq data (snRNA-seq). This is due to the experimental procedure of snRNA-seq. Small extracellular vesicles (sEVs) would be almost filtered out during the nuclei isolation and extraction process, so our software is not suitable for analyzing this type of data. 
 
-11. Does SEVtras support h5ad file converted from **Seurat**? 
+13. Does SEVtras support h5ad file converted from **Seurat**? 
 
  Yes. There is a `tutorial <https://www.youtube.com/watch?v=-MATf22tcak>`_ to convert Seurat to h5ad. I copied as following: 
  
