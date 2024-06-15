@@ -35,7 +35,7 @@ The pipeline of SEVtras only composed two parts: sEV_recognizer and ESAI_calcula
 
 Part I:
 ```bash
-SEVtras.sEV_recognizer(sample_file='./tests/sample_file', out_path='./outputs', species='Homo')
+SEVtras.sEV_recognizer(input_path='./tests', sample_file='./tests/sample_file', out_path='./outputs', species='Homo')
 ```
 
 Part II:
