@@ -27,6 +27,8 @@ The fourth parameter means whether to use the raw object in the ``adata_cell`` o
 
 The last two parameters define which index represents the sample and cell type information in the ``obs`` of adata. By default, SEVtras uses the index of ``batch`` and ``celltype`` in the ``obs`` of ``adata_cell``\. We can change the index with the parameters and *OBSsample* and *OBScelltype*\. 
 
+**Note:** The sample information in ``adata_ev`` is in the key of ``batch`` by default. If *OBSsample* != ``batch``, please change the key in the ``adata_ev`` too.
+
 The original cell type for each droplet listed in the ``obsm`` of ``SEVtras_sEVs.h5ad`` indexed as ``source``. 
 
 The result of *SEVumap.pdf* and *ESAIumap.pdf* is similar to the following: 
