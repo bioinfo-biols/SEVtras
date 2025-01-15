@@ -14,7 +14,7 @@ SEVtras provides function ``ESAI_calculator`` to evaluate dynamic of cellular sE
     import SEVtras
     SEVtras.ESAI_calculator(adata_ev_path='./tests/sEV_SEVtras.h5ad', adata_cell_path='./tests/test_cell.h5ad', out_path='./outputs', Xraw=False, OBSsample='batch', OBScelltype='celltype')
 
-The first two parameters represent the path to sEV- and cell- anndata objects. 
+The first two parameters represent the path to sEV- and cell- anndata objects. sEV-anndata object comes from the output of SEVtras.sEV_recognizer. The cell-anndata object is the same as conventional single cell analysis data coming from ``filtered_feature_bc_matrix`` directory in Cell Ranger **outs**. 
 
 The third parameter specifies the path of the ``ESAI_calculator`` outputs. The outputs include:  
 
@@ -27,7 +27,7 @@ The fourth parameter means whether to use the raw object in the ``adata_cell`` o
 
 The last two parameters define which index represents the sample and cell type information in the ``obs`` of adata. By default, SEVtras uses the index of ``batch`` and ``celltype`` in the ``obs`` of ``adata_cell``\. We can change the index with the parameters and *OBSsample* and *OBScelltype*\. 
 
-**Note:** The sample information in ``adata_ev`` is in the key of ``batch`` by default. If *OBSsample* != ``batch``, please change the key in the ``adata_ev`` too.
+**Note:** The sample information in ``adata_ev`` is in the key of ``batch`` by default. If *OBSsample* != ``batch``, please change the key in the ``adata_ev`` too before v0.2.12.
 
 The original cell type for each droplet listed in the ``obsm`` of ``SEVtras_sEVs.h5ad`` indexed as ``source``. 
 
@@ -37,3 +37,4 @@ The result of *SEVumap.pdf* and *ESAIumap.pdf* is similar to the following:
     :width: 600px
     :align: center
     
+A higher level of ESAI  indicates that this cell type has intense sEV secretion activity, which may be related to tumor tumor malignancy, invasion, metastasis and other disease progression. We recommend performing association analysis of ESAI with clinical indicators. 

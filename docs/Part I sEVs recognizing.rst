@@ -3,7 +3,7 @@ Part I *sEVs recognizing*
 
 Here, we used data in github ``tests`` directory as an example, and shown how SEVtras recognizing sEVs in scRNA-seq datasets. We have generated test data in ``h5ad`` format in github, and SEVtras also supports ``10x_mtx`` and ``h5`` data formats. 
 
-**Note1:** The input droplet-gene matrix for SEVtras should be the raw data; herein, the matrix should come from the *raw_feature_bc_matrix* directory in Cell Ranger *outs*\. 
+**Note1:** The input droplet-gene matrix for SEVtras should be the raw data in this part; herein, the matrix should come from the ``raw_feature_bc_matrix`` directory in Cell Ranger **outs**\. 
 
 **Note2:** This part requires parallel processing using the ``multiprocessing`` package. This package is currently not compatible with Jupyter on Windows 10 and certain version of WSL. Running this part in Linux is preferred.
 

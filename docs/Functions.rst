@@ -15,7 +15,7 @@ This function used for sEV recognizing.
 * *species*\: the species from which the scRNA-seq sample was sequenced, default is ``Homo``\. For mouse samples, you can use ``Mus``\, 
 * *predefine_threads*\: SEVtras uses parallel processing for acceleration, we can define how many cpu cores to use, default is all cpu cores minus two ``-2``\,  
 * *get_only*\: whether to read protein information in the adata, default is ``False``\,  
-* *score_t*\: the threshold for SEVtras score to recognize sEVs, default is ``None``\, which means using the default recognition parameters. If no sEVs found in the *sEVs_SEVtras.h5ad*\, we can change *score_t* to a smaller threshold (``str``), e.g. '10', 
+* *score_t*\: the threshold for SEVtras score to recognize sEVs, default is ``None``\, which means using the default recognition parameters. If no sEVs found in the *sEVs_SEVtras.h5ad*\, we can change *score_t* to a smaller threshold (``str``), e.g. '10',
 * *search_UMI*\: the UMI range to search for sEVs, default is ``500``, you can use ``200`` for stricter recognization,
 * *alpha*\: the parameter for identifying sEV representative genes for each sample, default is ``0.10``. If you cannot detect sEVs in all samples, the parameter can be loosened to a smaller value, e.g. ``0.09``\,
 * *dir_origin*\: the path of *matrix.mtx.gz*\, default is ``True`` assuming that the file of *matrix.mtx.gz* locates at ``sample/outs/raw_feature_bc_matrix/``\. If you set it as ``False``, SEVtras search for *matrix.mtx.gz* in the path of each sample in the parameter *sample_file*\. 

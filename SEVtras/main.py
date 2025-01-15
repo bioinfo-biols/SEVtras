@@ -90,6 +90,7 @@ def sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', prede
         adata = read_adata(each_adata, get_only=get_only, dir_origin=dir_origin)
         adata = filter_adata(adata)
         sample = sample.replace(".", "_")
+        sample = sample.replace("/", "_")
         name_list.append(sample)
 
         iteration_list = ev_list_s
@@ -177,14 +178,20 @@ def sEV_recognizer(sample_file, out_path, input_path=None, species='Homo', prede
 
     return('Recognization done!')
 
-def ESAI_calculator(adata_ev_path, adata_cell_path, out_path, OBSsample='batch', OBScelltype='celltype', OBSev='sEV', OBSMpca='X_pca', cellN=10, Xraw = True, normalW=True, plot_cmp='SEV_builtin', save_plot_prefix='', OBSMumap='X_umap',size=10):
+def ESAI_calculator(adata_ev_path, adata_cell_path, out_path, species='Homo', OBSsample='batch', OBScelltype='celltype', OBSev='sEV', OBSMpca='X_pca', cellN=10, Xraw = True, normalW=True, plot_cmp='SEV_builtin', save_plot_prefix='', OBSMumap='X_umap',size=10):
     if not os.path.exists(out_path):
         os.makedirs(out_path)
 
     adata_ev = read_adata(adata_ev_path, get_only=False)
     adata_cell = read_adata(adata_cell_path, get_only=False)
+    if 'batch' in adata_ev.obs.columns:
+        if OBSsample != 'batch':
+            adata_ev.obs[OBSsample] = adata_ev.obs['batch'].values
+    else:
+        print('Please check obs.keys in adata_ev.')
+
     from .functional import deconvolver, ESAI_celltype, plot_SEVumap, plot_ESAIumap
-    celltype_e_number, adata_evS, adata_com = deconvolver(adata_ev, adata_cell, OBSsample, OBScelltype, OBSev, OBSMpca, cellN, Xraw, normalW)
+    celltype_e_number, adata_evS, adata_com = deconvolver(adata_ev, adata_cell, species, OBSsample, OBScelltype, OBSev, OBSMpca, cellN, Xraw, normalW)
     ##ESAI for sample
     sample_ESAI = (adata_com[adata_com.obs[OBScelltype]==OBSev,].obs[OBSsample].value_counts() / adata_com[adata_com.obs[OBScelltype]!=OBSev,].obs[OBSsample].value_counts()).fillna(0)
 
@@ -232,7 +239,7 @@ def sEV_imputation(adata_sEV):
     return(adata_out)
 
 def sEV_enrichment(adata_sEV, nBP=15):
-    matrix = adata_sEV.X.A
+    matrix = adata_sEV.X.toarray()
     names = adata_sEV.var_names
     n_top = 15
     norm_dict = (matrix/(1+matrix.sum(1).reshape(len(matrix), 1)))*100

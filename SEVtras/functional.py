@@ -11,7 +11,7 @@ import pickle
 # from pathlib import Path
 from os import path
 
-def source_biogenesis(adata_cell, OBScelltype='celltype', Xraw = True, normalW=True):
+def source_biogenesis(adata_cell, species, OBScelltype='celltype', Xraw = True, normalW=True):
     if Xraw:
         X_input = adata_cell.raw
     else:
@@ -30,7 +30,10 @@ def source_biogenesis(adata_cell, OBScelltype='celltype', Xraw = True, normalW=T
     gsea_pval = []
     num_clusters = len(adata_cell.obs[OBScelltype].cat.categories)
 
-    gmt_path = path.join(path.dirname(__file__), 'evs.gmt')#Path(__file__).parent / 'evs.gmt'
+    if species == 'Homo':
+        gmt_path = path.join(path.dirname(__file__), 'evs.gmt')#Path(__file__).parent / 'evs.gmt'
+    elif species == 'Mus':
+        gmt_path = path.join(path.dirname(__file__), 'evsM.gmt')
 
     for i in range(num_clusters):
         i = adata_cell.obs[OBScelltype].cat.categories[i]
@@ -109,10 +112,10 @@ def preprocess_source(adata_ev, adata_cell, OBScelltype='celltype', OBSev='sEV',
 
     return(adata_combined)
 
-def deconvolver(adata_ev, adata_cell, OBSsample='batch', OBScelltype='celltype', OBSev='sEV', OBSMpca='X_pca', cellN=10, Xraw = True, normalW=True):
+def deconvolver(adata_ev, adata_cell, species, OBSsample='batch', OBScelltype='celltype', OBSev='sEV', OBSMpca='X_pca', cellN=10, Xraw = True, normalW=True):
 
     adata_combined = preprocess_source(adata_ev, adata_cell, OBScelltype=OBScelltype, OBSev=OBSev, Xraw = Xraw)
-    gsea_pval_dat = source_biogenesis(adata_cell, OBScelltype=OBScelltype, Xraw = Xraw, normalW=normalW)
+    gsea_pval_dat = source_biogenesis(adata_cell, species, OBScelltype=OBScelltype, Xraw = Xraw, normalW=normalW)
     near_neighbor_dat = near_neighbor(adata_combined, OBSsample=OBSsample, OBSev=OBSev, OBScelltype=OBScelltype, OBSMpca=OBSMpca, cellN=cellN)
     
     near_neighbor_dat['times'] = ''
@@ -224,6 +227,7 @@ def plot_SEVumap(adata_com, out_path, plot_cmp='SEV_builtin', save_plot='SEVumap
         plt.axis('off')
         plt.tick_params(axis='both', left=False, top=False, right=False, bottom=False, labelleft=False, labeltop=False, labelright=False, labelbottom=False)
         plt.savefig(out_path + str(save_plot) + '.pdf', dpi = 300, transparent=True, format = 'pdf', bbox_inches='tight')
+        plt.show()
         print('SEVumap saved in' + out_path + str(save_plot) + '.pdf')
     except ImportError:
         raise ImportError("Please install matplotlib for visualization")
@@ -262,6 +266,7 @@ def plot_ESAIumap(adata_com, out_path, obs_ESAI='ESAI_c', plot_cmp='SEV_builtin'
         plt.axis('off')
         plt.tick_params(axis='both', left=False, top=False, right=False, bottom=False, labelleft=False, labeltop=False, labelright=False, labelbottom=False)
         plt.savefig(out_path + str(save_plot) + '.pdf', dpi = 300, transparent=True, format = 'pdf', bbox_inches='tight')
+        plt.show()
         print('ESAIumap saved in' + out_path + str(save_plot) + '.pdf')
     except ImportError:
         raise ImportError("Please install matplotlib for visualization")

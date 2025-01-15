@@ -6,3 +6,4 @@ include tests/*
 include SEVtras/id_homo_rna_ev
 include SEVtras/id_mus_rna_ev
 include SEVtras/evs.gmt
+include SEVtras/evsM.gmt

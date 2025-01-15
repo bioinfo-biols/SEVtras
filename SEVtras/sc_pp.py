@@ -2817,7 +2817,7 @@ def _pca_with_sparse(X, npcs, solver='arpack', mu=None, random_state=None):
     X = check_array(X, accept_sparse=['csr', 'csc'])
 
     if mu is None:
-        mu = X.mean(0).A.flatten()[None, :]
+        mu = X.mean(0).toarray().flatten()[None, :]
     mdot = mu.dot
     mmat = mdot
     mhdot = mu.T.dot
