@@ -356,7 +356,7 @@ def _get_array_values(
     from scipy.sparse import issparse
 
     if issparse(matrix):
-        matrix = matrix.toarray()
+        matrix = matrix.A#toarray()
 
     return matrix
 
@@ -472,7 +472,7 @@ def obs_df(
         if isinstance(val, np.ndarray):
             df[added_k] = np.ravel(val[:, idx])
         elif isinstance(val, spmatrix):
-            df[added_k] = np.ravel(val[:, idx].toarray())
+            df[added_k] = np.ravel(val[:, idx].A)#toarray()
         elif isinstance(val, pd.DataFrame):
             df[added_k] = val.loc[:, idx]
 
@@ -538,7 +538,7 @@ def var_df(
         if isinstance(val, np.ndarray):
             df[added_k] = np.ravel(val[:, idx])
         elif isinstance(val, spmatrix):
-            df[added_k] = np.ravel(val[:, idx].toarray())
+            df[added_k] = np.ravel(val[:, idx].A)#toarray()
         elif isinstance(val, pd.DataFrame):
             df[added_k] = val.loc[:, idx]
     return df

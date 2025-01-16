@@ -35,11 +35,10 @@ SEVtras.sEV_recognizer(input_path='./tests', sample_file='./tests/sample_file', 
 
 Part II:
 ```bash
-SEVtras.ESAI_calculator(adata_ev_path='./outputs/sEVs_SEVtras.h5ad', adata_cell_path='./outputs/adata_cell.h5ad', out_path='./outputs', Xraw=False, OBSsample='batch', OBScelltype='celltype')
+SEVtras.ESAI_calculator(adata_ev_path='./outputs/sEV_SEVtras.h5ad', adata_cell_path='./tests/adata_cell.h5ad', out_path='./outputs', Xraw=False, OBSsample='batch', OBScelltype='celltype')
 ```
 
 Further tutorials please refer to  https://SEVtras.readthedocs.io/.
 
 ### Citation
-
-He, R., Zhu, J., Ji, P. et al. SEVtras delineates small extracellular vesicles at droplet resolution from single-cell transcriptomes. Nat Methods 21, 259–266 (2024). https://doi.org/10.1038/s41592-023-02117-1
+He, R., Zhu, J., Ji, P. et al. SEVtras delineates small extracellular vesicles at droplet resolution from single-cell transcriptomes. Nat Methods 21, 259-266 (2024). https://doi.org/10.1038/s41592-023-02117-1

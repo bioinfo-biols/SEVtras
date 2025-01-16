@@ -1287,7 +1287,7 @@ def regress_out(
 
     if issparse(X):
         # logg.info("    sparse input is densified and may " "lead to high memory use")
-        X = X.toarray()
+        X = X.A#toarray()
 
     sn_jobs = 1
     n_jobs = sn_jobs if n_jobs is None else n_jobs
@@ -1499,7 +1499,7 @@ def scale_sparse(
         #     "... as `zero_center=True`, sparse input is "
         #     "densified and may lead to large memory consumption"
         # )
-        X = X.toarray()
+        X = X.A#toarray()
         copy = False  # Since the data has been copied
     return scale_array(
         X,
@@ -2713,11 +2713,11 @@ def pca(
         pca_ = IncrementalPCA(n_components=n_comps)
 
         for chunk, _, _ in adata_comp.chunked_X(chunk_size):
-            chunk = chunk.toarray() if issparse(chunk) else chunk
+            chunk = chunk.A if issparse(chunk) else chunk#toarray()
             pca_.partial_fit(chunk)
 
         for chunk, start, end in adata_comp.chunked_X(chunk_size):
-            chunk = chunk.toarray() if issparse(chunk) else chunk
+            chunk = chunk.A if issparse(chunk) else chunk#toarray()
             X_pca[start:end] = pca_.transform(chunk)
     elif (not issparse(X) or svd_solver == "randomized") and zero_center:
         from sklearn.decomposition import PCA
@@ -2729,7 +2729,7 @@ def pca(
                 "svd_solver 'randomized' does not work with sparse input. Densifying the array. "
                 "This may take a very large amount of memory."
             )
-            X = X.toarray()
+            X = X.A#toarray()
         pca_ = PCA(
             n_components=n_comps, svd_solver=svd_solver, random_state=random_state
         )
@@ -2817,7 +2817,7 @@ def _pca_with_sparse(X, npcs, solver='arpack', mu=None, random_state=None):
     X = check_array(X, accept_sparse=['csr', 'csc'])
 
     if mu is None:
-        mu = X.mean(0).toarray().flatten()[None, :]
+        mu = X.mean(0).A.flatten()[None, :]#toarray()
     mdot = mu.dot
     mmat = mdot
     mhdot = mu.T.dot

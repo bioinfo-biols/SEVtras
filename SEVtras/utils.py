@@ -137,8 +137,8 @@ def process_inter(i):
 
 def corr_genes(i):
     #i, inter_adata
-    if (len(np.unique(env.Inter_adata.X.toarray()[:, i])) > 1):
-        tmp = scipy.stats.spearmanr(env.Inter_adata.X.toarray()[:, i], -np.log(env.Inter_adata.obs['score'] + 10**-50))
+    if (len(np.unique(env.Inter_adata.X.A[:, i])) > 1):#toarray()
+        tmp = scipy.stats.spearmanr(env.Inter_adata.X.A[:, i], -np.log(env.Inter_adata.obs['score'] + 10**-50))#toarray()
         return(tmp.correlation)
     else:
         return(-1)

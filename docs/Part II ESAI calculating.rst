@@ -5,7 +5,7 @@ With the output of ``SEVtras.sEV_recognizer`` in :doc:`/Part I sEVs recognizing`
 
 **Note1:** The input cell matrix should contain sample and cell type information in the ``obs`` of adata. 
 
-**Note2:** This command can be compatible to all platform, including Jupyter on Windows. 
+**Note2:** This command can be compatible to all platform, including Jupyter on Windows. If you encounter a gesapy file occupation error on Windows platform, please try to rerun the same command. 
 
 SEVtras provides function ``ESAI_calculator`` to evaluate dynamic of cellular sEV secretion activity. 
 

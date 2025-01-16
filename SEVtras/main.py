@@ -239,7 +239,7 @@ def sEV_imputation(adata_sEV):
     return(adata_out)
 
 def sEV_enrichment(adata_sEV, nBP=15):
-    matrix = adata_sEV.X.toarray()
+    matrix = adata_sEV.X.A#toarray()
     names = adata_sEV.var_names
     n_top = 15
     norm_dict = (matrix/(1+matrix.sum(1).reshape(len(matrix), 1)))*100
