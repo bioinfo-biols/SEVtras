@@ -18,8 +18,8 @@ The first two parameters represent the path to sEV- and cell- anndata objects. s
 
 The third parameter specifies the path of the ``ESAI_calculator`` outputs. The outputs include:  
 
--  an adata file combining both ``adata_ev`` and ``adata_cell``, named *SEVtras_combined.h5ad*; 
--  two csv files calculating the sEV secretion activity index at the sample level (**ESAI**) and cell type level (**ESAI_c**), named  *ESAI_sample.csv* and *ESAI_celltype.csv*\; 
+-  an adata file combining both ``adata_ev`` and ``adata_cell``, named *SEVtras_combined.h5ad*; **ESAI_c** and **ESAI_cS** are indexed in the obs matrix, and represent the sEV secretion activity index at the cell type level across all samples and resolved sample by sample; 
+-  two csv files calculating the sEV secretion activity index at the sample level (**ESAI**) and cell type level (**ESAI_cS**), named  *ESAI_sample.csv* and *ESAI_celltype.csv*\; 
 -  one pdf file embedding sEVs and cells in a umap , named *SEVumap.pdf*\; 
 -  and two pdf files plotting the **ESAI_c** in a umap, named *ESAIumap.pdf* and *ESAIumap_sample.pdf*\; Here, **ESAI_c** is the sEV secretion activity at the cell type level in all your samples, and **ESAI_cS** means the sEV secretion activity at the cell type level resolved sample by sample. 
 
